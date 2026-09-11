@@ -58,11 +58,5 @@
       <eval input="Zapp/{zapp_index}/Output/slopeBand"
         outputFormat="keyValue 0={{under25}}|1={{range25to30}}|2={{range30to35}}|3={{range35to40}}|4={{over40}}" default="{{under25}}" />
     </div>
-
-    <userInput>
-      <pushButton name="next"
-        onLongPressStart="$.put('/Zapp/{zapp_index}/Event', 8, null, 'int32');" />
-    </userInput>
-
   </div>
 </uiView>
