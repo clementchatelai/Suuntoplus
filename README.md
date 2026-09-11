@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Ski Touring Risk estimates the current terrain slope during a ski-touring
+Ski Touring slope estimates the current terrain slope during a ski-touring
 activity and presents a five-level exposure band on the watch.
 
 ## Declared resources
