@@ -1,4 +1,4 @@
-# Ski Touring Risk
+# Ski Touring Slope
 
 ## Purpose
 
