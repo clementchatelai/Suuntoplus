@@ -54,12 +54,6 @@ moving average before being exposed as `slopeDeg`.
 reference altitude. `slopeMethod` is `0` for conversion mode, `1` for straight
 segment mode, and `-1` before a method has produced a result.
 
-## User interaction
-
-A long press on the `NEXT` button sends event `8` to `main.js`. This resets the
-GPS references, the active method, the displayed slope, and the smoothing
-history.
-
 ## UI and localization
 
 The watch UI is defined in `t.html`. It displays the slope, risk band,
