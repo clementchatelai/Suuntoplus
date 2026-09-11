@@ -1,0 +1,14 @@
+{
+  "title": "AVALANCHE",
+  "low": "FAIBLE",
+  "moderate": "MODERE",
+  "marked": "MARQUE",
+  "strong": "FORT",
+  "veryStrong": "TRES FORT",
+  "slope": "PENTE",
+  "under25": "<25",
+  "range25to30": "25-30",
+  "range30to35": "30-35",
+  "range35to40": "35-40",
+  "over40": ">40"
+}

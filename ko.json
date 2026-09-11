@@ -1,0 +1,14 @@
+{
+  "title": "NUNSAETAE",
+  "low": "NATGEUM",
+  "moderate": "JUNGAN",
+  "marked": "JUUI",
+  "strong": "NOPUM",
+  "veryStrong": "매우 높음",
+  "slope": "GYEONGSA",
+  "under25": "<25",
+  "range25to30": "25-30",
+  "range30to35": "30-35",
+  "range35to40": "35-40",
+  "over40": ">40"
+}

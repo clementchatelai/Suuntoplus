@@ -1,0 +1,30 @@
+{
+  "name": "Ski Touring Risk",
+  "version": "2.0",
+  "author": "Ghislain Dérogis",
+  "description": "Estimate avalanche exposure from slope angle during ski touring.",
+  "type": "feature",
+  "usage": "workout",
+  "modificationTime": 1748822400,
+  "in": [
+    { "name": "coordinates", "source": "Fusion/Location/GeoCoordinates", "type": "subscribe" },
+    { "name": "gpsCoordinates", "source": "Navigation/Gps/Coordinates/Full", "type": "subscribe" },
+    { "name": "distance", "source": "Activity/Move/-1/Distance/Current", "type": "subscribe" },
+    { "name": "altitude", "source": "Activity/Move/-1/Altitude/Current", "type": "subscribe" }
+  ],
+  "template": [
+    { "name": "t-s.html", "displays": ["s"] },
+    { "name": "t-m.html", "displays": ["m"] },
+    { "name": "t-l.html", "displays": ["l"] },
+    { "name": "t-n.html", "displays": ["n"] },
+    { "name": "t-o.html", "displays": ["o"] },
+    { "name": "t-q.html", "displays": ["q"] }
+  ],
+  "out": [
+    { "name": "slopeDeg", "format": "Count_Fourdigits", "log": true, "shownName": "Maximum slope (deg)" },
+    { "name": "riskLevel", "format": "Count_Fourdigits", "log": true, "shownName": "Avalanche exposure level" },
+    { "name": "slopeBand" },
+    { "name": "isDescending" },
+    { "name": "slopeMethod" }
+  ]
+}

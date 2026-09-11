@@ -1,0 +1,14 @@
+{
+  "title": "CHIONOSTIVADA",
+  "low": "CHAMILOS",
+  "moderate": "METRIOS",
+  "marked": "AYXIMENOS",
+  "strong": "YPSILOS",
+  "veryStrong": "POLY YPSILOS",
+  "slope": "KLISI",
+  "under25": "<25",
+  "range25to30": "25-30",
+  "range30to35": "30-35",
+  "range35to40": "35-40",
+  "over40": ">40"
+}

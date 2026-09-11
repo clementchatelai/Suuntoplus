@@ -1,0 +1,68 @@
+<uiView
+  onLoad="
+    var slopeBandSubscription;
+    var descendingSubscription;
+    var slopeMethodSubscription;
+    var updateSlopeColor = function(value) {
+      var color = '#40C878';
+      if (value >= 4) color = '#FF4D4F';
+      else if (value >= 3) color = '#FF9F43';
+      else if (value >= 1) color = '#FFD43B';
+      setStyle('#risk-display', 'color', color);
+      setStyle('#slope-band', 'color', color);
+      setStyle('#straight-arrow', 'color', color);
+      setStyle('#conversion-arrow', 'color', color);
+    };
+    var updateDescendingSign = function(value) {
+      setStyle('#descending-sign', 'display', value ? 'inline-block' : 'none');
+    };
+    var updateSlopeMethod = function(value) {
+      setStyle('#straight-arrow', 'visibility', 'hidden');
+      setStyle('#conversion-arrow', 'visibility', 'hidden');
+      if (value == 1) setStyle('#straight-arrow', 'visibility', 'visible');
+      if (value == 0) setStyle('#conversion-arrow', 'visibility', 'visible');
+    };
+  "
+  onActivate="
+    updateSlopeColor(0);
+    slopeBandSubscription = $.subscribe('/Zapp/{zapp_index}/Output/slopeBand', updateSlopeColor);
+    updateDescendingSign(0);
+    descendingSubscription = $.subscribe('/Zapp/{zapp_index}/Output/isDescending', updateDescendingSign);
+    updateSlopeMethod(-1);
+    slopeMethodSubscription = $.subscribe('/Zapp/{zapp_index}/Output/slopeMethod', updateSlopeMethod);
+  "
+  onDeactivate="$.unsubscribe(slopeBandSubscription); $.unsubscribe(descendingSubscription); $.unsubscribe(slopeMethodSubscription);"
+>
+  <div>
+
+    <div class="sp-title-bg" style="width:100%;height:15%;"></div>
+    <div class="sp-title-text sp-t-m p-hc" style="top:3%;">{{title}}</div>
+
+    <div id="straight-arrow" class="f-ico-l" style="visibility:hidden;position:absolute;top:calc(28% - 50%e);left:calc(24% - 50%e);width:70px;height:70px;text-align:center;color:#40C878;z-index:10;">&#xF280;</div>
+    <div id="conversion-arrow" class="f-ico-l" style="visibility:hidden;position:absolute;top:calc(28% - 50%e);left:calc(24% - 50%e);width:70px;height:70px;text-align:center;color:#40C878;z-index:10;">&#xF286;</div>
+
+    <div id="risk-display" class="sp-t-s p-hc" style="top:17%;color:#40C878;">
+      <eval input="Zapp/{zapp_index}/Output/riskLevel"
+            outputFormat="keyValue 0={{low}}|1={{moderate}}|2={{marked}}|3={{strong}}|4={{veryStrong}}" default="{{low}}" />
+    </div>
+
+          <div class="f-s cm-mid" style="top:27%;left:2%;width:96%;max-height:28px;text-align:center;">{{slope}}</div>
+
+    <div class="f-num sp-d-xxl" style="top:33%;left:2%;width:96%;text-align:center;">
+      <span id="descending-sign" style="display:none;color:#FFFFFF;">-</span>
+      <eval input="Zapp/{zapp_index}/Output/slopeDeg"
+        outputFormat="Count_Threedigits" default="0" /><span>°</span>
+    </div>
+
+    <div id="slope-band" class="sp-t-l" style="top:69%;left:2%;width:96%;text-align:center;color:#40C878;">
+      <eval input="Zapp/{zapp_index}/Output/slopeBand"
+        outputFormat="keyValue 0={{under25}}|1={{range25to30}}|2={{range30to35}}|3={{range35to40}}|4={{over40}}" default="{{under25}}" />
+    </div>
+
+    <userInput>
+      <pushButton name="next"
+        onLongPressStart="$.put('/Zapp/{zapp_index}/Event', 8, null, 'int32');" />
+    </userInput>
+
+  </div>
+</uiView>

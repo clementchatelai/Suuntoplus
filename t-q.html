@@ -1,0 +1,28 @@
+<uiView onLoad="
+  var colorToken; var methodToken; var descendingToken;
+  var updateColor = function(value) { var color = value >= 4 ? '#FF4D4F' : value >= 3 ? '#FF9F43' : value >= 1 ? '#FFD43B' : '#40C878'; setStyle('#risk-display', 'color', color); setStyle('#slope-band', 'color', color); setStyle('#straight-arrow', 'color', color); setStyle('#conversion-arrow', 'color', color); };
+  var updateMethod = function(value) { setStyle('#straight-arrow', 'visibility', value == 0 ? 'hidden' : 'visible'); setStyle('#conversion-arrow', 'visibility', value == 0 ? 'visible' : 'hidden'); };
+  var updateDescending = function(value) { setStyle('#descending-sign', 'display', value ? 'inline-block' : 'none'); };
+" onActivate="updateColor(0); updateMethod(-1); updateDescending(0); colorToken = $.subscribe('/Zapp/{zapp_index}/Output/slopeBand', updateColor); methodToken = $.subscribe('/Zapp/{zapp_index}/Output/slopeMethod', updateMethod); descendingToken = $.subscribe('/Zapp/{zapp_index}/Output/isDescending', updateDescending);" onDeactivate="$.unsubscribe(colorToken); $.unsubscribe(methodToken); $.unsubscribe(descendingToken);">
+  <div>
+    <div class="sp-title-bg" style="width:100%;height:15%;"></div><div class="sp-title-text sp-t-m p-hc" style="top:3%;">{{title}}</div>
+    <div id="straight-arrow" class="f-ico-m"
+        style="position:absolute;top:calc(25% - 50%e);left:calc(18% - 50%e);
+        width:120px;height:120px;font-size:90px;line-height:120px;
+        text-align:center;color:#40C878;z-index:10;">
+    &#xF280;
+    </div>
+
+    <div id="conversion-arrow" class="f-ico-m"
+        style="visibility:hidden;position:absolute;top:calc(25% - 50%e);left:calc(18% - 50%e);
+        width:120px;height:120px;font-size:90px;line-height:120px;
+        text-align:center;color:#40C878;z-index:10;">
+    &#xF286;
+    </div>
+    <div id="risk-display" class="sp-t-s p-hc" style="top:17%;color:#40C878;"><eval input="Zapp/{zapp_index}/Output/riskLevel" outputFormat="keyValue 0={{low}}|1={{moderate}}|2={{marked}}|3={{strong}}|4={{veryStrong}}" default="{{low}}" /></div>
+    <div class="sp-t-m cm-mid" style="top:27%;left:2%;width:96%;max-height:34px;text-align:center;">{{slope}}</div>
+    <div class="f-num sp-d-xxl" style="top:33%;left:2%;width:96%;text-align:center;"><span id="descending-sign" style="display:none;color:#FFFFFF;">-</span><eval input="Zapp/{zapp_index}/Output/slopeDeg" outputFormat="Count_Threedigits" default="0" /><span style="position:relative;top:-1.4em;font-size:50%;">°</span></div>
+    <div id="slope-band" class="sp-t-l" style="top:75%;left:2%;width:96%;text-align:center;color:#40C878;"><eval input="Zapp/{zapp_index}/Output/slopeBand" outputFormat="keyValue 0={{under25}}|1={{range25to30}}|2={{range30to35}}|3={{range35to40}}|4={{over40}}" default="{{under25}}" /></div>
+    <userInput><pushButton name="next" onLongPressStart="$.put('/Zapp/{zapp_index}/Event', 8, null, 'int32');" /></userInput>
+  </div>
+</uiView>

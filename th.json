@@ -1,0 +1,14 @@
+{
+  "title": "AVALANCHE",
+  "low": "TAM",
+  "moderate": "PANA KLANG",
+  "marked": "SUNG",
+  "strong": "SUNG MAK",
+  "veryStrong": "SUNG MAK MAK",
+  "slope": "KHWAAM CHAN",
+  "under25": "<25",
+  "range25to30": "25-30",
+  "range30to35": "30-35",
+  "range35to40": "35-40",
+  "over40": ">40"
+}
